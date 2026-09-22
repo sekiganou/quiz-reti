@@ -3,9 +3,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@workspace/ui/*": ["./src/*"]
-    }
+      "@workspace/ui/*": [
+        "./src/*"
+      ]
+    },
+    "ignoreDeprecations": "6.0"
   },
-  "include": ["."],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

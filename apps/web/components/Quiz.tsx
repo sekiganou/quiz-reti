@@ -34,8 +34,8 @@ function shuffleAnswers({ question }: { question: Question }): Question {
   };
 }
 
-function mapCorrectAnswers(questions: Question[]): Map<number, string> {
-  const correctAnswerMapping = new Map<number, string>();
+function mapCorrectAnswers(questions: Question[]): Map<number, number[]> {
+  const correctAnswerMapping = new Map<number, number[]>();
   questions.forEach((question) => {
     mapCorrectAnswersHelper(question, correctAnswerMapping);
   });
@@ -44,13 +44,12 @@ function mapCorrectAnswers(questions: Question[]): Map<number, string> {
 
 function mapCorrectAnswersHelper(
   question: Question,
-  correctAnswerMapping: Map<number, string>
+  correctAnswerMapping: Map<number, number[]>
 ) {
-  question.answers.forEach((answer, index) => {
-    if (answer.isCorrect) {
-      correctAnswerMapping.set(question.id, answer.answerText);
-    }
-  });
+  correctAnswerMapping.set(
+    question.id,
+    question.answers.filter((answer) => answer.isCorrect).map((answer) => answer.id)
+  );
   if (question.followUpQuestion) {
     mapCorrectAnswersHelper(question.followUpQuestion, correctAnswerMapping);
   }
@@ -70,7 +69,7 @@ export default function Quiz({
     shuffleQuestions(questions).slice(0, quizQuestionsCount)
   );
 
-  const [correctAnswers] = useState<Map<number, string>>(
+  const [correctAnswers] = useState<Map<number, number[]>>(
     mapCorrectAnswers(shuffledQuestions)
   );
 
@@ -113,12 +112,14 @@ export default function Quiz({
     fieldName: string,
     schema: Record<string, ZodTypeAny> = {}
   ): Record<string, ZodTypeAny> {
-    schema[fieldName] = z.enum(
-      question.answers.map((a) => a.answerText) as [string, ...string[]],
-      {
+    const answerIds = question.answers.map((answer) => answer.id.toString());
+    schema[fieldName] = question.multipleAnswers
+      ? z.array(z.enum(answerIds as [string, ...string[]])).min(1, {
+        message: "Seleziona almeno una risposta.",
+      })
+      : z.enum(answerIds as [string, ...string[]], {
         required_error: "Rispondi a tutte le domande.",
-      }
-    );
+      });
 
     if (question.followUpQuestion) {
       buildSchemaFromQuestion(
@@ -148,11 +149,19 @@ export default function Quiz({
     let userAnswersMap = new Array<UserAnswer>();
 
     Object.entries(data).forEach(([questionId, answer]) => {
-      const correctAnswer = correctAnswers.get(Number(questionId));
-      if (answer === correctAnswer) {
+      const selectedAnswerIds = (Array.isArray(answer) ? answer : [answer]).map(
+        Number
+      );
+      const correctAnswerIds = correctAnswers.get(Number(questionId)) || [];
+      const selectedSet = new Set(selectedAnswerIds);
+      const correctSet = new Set(correctAnswerIds);
+      const isCorrect =
+        selectedSet.size === correctSet.size &&
+        selectedAnswerIds.every((answerId) => correctSet.has(answerId));
+      if (isCorrect) {
         userAnswersMap.push({
           questionId: Number(questionId),
-          answerText: answer,
+          answerIds: selectedAnswerIds,
           isCorrect: true,
         });
         countCorrect += 1;
@@ -160,7 +169,7 @@ export default function Quiz({
         countWrong += 1;
         userAnswersMap.push({
           questionId: Number(questionId),
-          answerText: answer,
+          answerIds: selectedAnswerIds,
           isCorrect: false,
         });
       }

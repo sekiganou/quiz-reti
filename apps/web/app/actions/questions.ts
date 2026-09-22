@@ -5,7 +5,7 @@ import path from "path";
 
 export interface UserAnswer {
   questionId: number;
-  answerText: string;
+  answerIds: number[];
   isCorrect: boolean;
 }
 
@@ -20,6 +20,7 @@ export interface Question {
   topic: string;
   image: string | null;
   content: string;
+  multipleAnswers: boolean;
   followUpQuestion: Question | null;
   answers: Answer[];
 }
@@ -30,6 +31,7 @@ const TRUEANSWER_LETTER = "T";
 const FALSEANSWER_LETTER = "F";
 const IMAGE_LETTER = "I";
 const TOPIC_LETTER = "N";
+const MULTIPLE_ANSWERS_LETTER = "M";
 const IMAGE_PATH_PREFIX = "/images/";
 
 export async function getQuestions() {
@@ -50,7 +52,8 @@ async function loadQuestionsFromFile(fullPath: string): Promise<Question[]> {
       !line.startsWith(TRUEANSWER_LETTER) &&
       !line.startsWith(FALSEANSWER_LETTER) &&
       !line.startsWith(IMAGE_LETTER) &&
-      !line.startsWith(TOPIC_LETTER)
+      !line.startsWith(TOPIC_LETTER) &&
+      !line.startsWith(MULTIPLE_ANSWERS_LETTER)
     ) {
       throw new Error(`Invalid line format: ${line}`);
     }
@@ -63,6 +66,7 @@ async function loadQuestionsFromFile(fullPath: string): Promise<Question[]> {
           topic: "",
           image: null,
           content: currentText,
+          multipleAnswers: false,
           followUpQuestion: null,
           answers: [],
         };
@@ -78,6 +82,7 @@ async function loadQuestionsFromFile(fullPath: string): Promise<Question[]> {
           topic: currentQuestion.topic,
           content: currentText,
           image: null,
+          multipleAnswers: false,
           followUpQuestion: null,
           answers: [],
         };
@@ -120,6 +125,16 @@ async function loadQuestionsFromFile(fullPath: string): Promise<Question[]> {
           throw new Error("Title without a main question");
         }
         currentQuestion.topic = currentText;
+        break;
+      }
+      case MULTIPLE_ANSWERS_LETTER: {
+        if (!currentQuestion) {
+          throw new Error("Multiple-answer marker without a main question");
+        }
+        if (currentText !== "true") {
+          throw new Error("Multiple-answer marker must be 'true'");
+        }
+        currentQuestion.multipleAnswers = true;
         break;
       }
       default:

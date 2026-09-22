@@ -4,6 +4,7 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@workspace/ui/components/radio-group";
+import { Checkbox } from "@workspace/ui/components/checkbox";
 import Image from "next/image";
 import { Label } from "@workspace/ui/components/label";
 import { ReactNode } from "react";
@@ -49,27 +50,51 @@ export default function ReviewQuiz({
             </div>
           )}
           <div>
-            <RadioGroup disabled={true} defaultValue={userAnswer.answerText}>
-              {question.answers.map((answer, index) => {
-                const isCorrect = answer.isCorrect;
-                const isSelected =
-                  !userAnswer.isCorrect &&
-                  userAnswer.answerText === answer.answerText;
-                return (
-                  <div className="flex items-center gap-3" key={index}>
-                    <RadioGroupItem
-                      value={answer.answerText}
-                      id={`review-${question.id}-answer-${index}`}
-                    />
-                    <Label htmlFor={`review-${question.id}-answer-${index}`}>
-                      {answer.answerText}
-                    </Label>
-                    {isCorrect && <IconCheck className="text-green-600" />}
-                    {isSelected && !isCorrect && <IconX className="text-red-600" />}
-                  </div>
-                );
-              })}
-            </RadioGroup>
+            {question.multipleAnswers ? (
+              <div className="flex flex-col gap-2">
+                {question.answers.map((answer, index) => {
+                  const isCorrect = answer.isCorrect;
+                  const isSelected = userAnswer.answerIds.includes(answer.id);
+                  return (
+                    <div className="flex items-center gap-3" key={index}>
+                      <Checkbox
+                        checked={isSelected}
+                        disabled
+                        id={`review-${question.id}-answer-${index}`}
+                      />
+                      <Label
+                        className="peer-disabled:cursor-default peer-disabled:opacity-100"
+                        htmlFor={`review-${question.id}-answer-${index}`}
+                      >
+                        {answer.answerText}
+                      </Label>
+                      {isCorrect && <IconCheck className="text-green-600" />}
+                      {isSelected && !isCorrect && <IconX className="text-red-600" />}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <RadioGroup disabled defaultValue={userAnswer.answerIds[0]?.toString()}>
+                {question.answers.map((answer, index) => {
+                  const isCorrect = answer.isCorrect;
+                  const isSelected = userAnswer.answerIds.includes(answer.id);
+                  return (
+                    <div className="flex items-center gap-3" key={index}>
+                      <RadioGroupItem
+                        value={answer.id.toString()}
+                        id={`review-${question.id}-answer-${index}`}
+                      />
+                      <Label htmlFor={`review-${question.id}-answer-${index}`}>
+                        {answer.answerText}
+                      </Label>
+                      {isCorrect && <IconCheck className="text-green-600" />}
+                      {isSelected && !isCorrect && <IconX className="text-red-600" />}
+                    </div>
+                  );
+                })}
+              </RadioGroup>
+            )}
           </div>
         </CardContent>
         {question.followUpQuestion && (

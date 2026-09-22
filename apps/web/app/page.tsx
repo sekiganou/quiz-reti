@@ -94,7 +94,7 @@ export default function Page() {
       <header className="flex items-center justify-between p-4 border-b gap-2">
         <div className="flex items-center gap-2">
           <img src="/icon0.svg" alt="Logo" className="h-7 w-auto" />
-          <h1 className="text-2xl font-bold">Quiz Fisica</h1>
+          <h1 className="text-2xl font-bold">Quiz Reti</h1>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleOpenStats}>
@@ -174,7 +174,7 @@ export default function Page() {
         <footer className="my-8 w-full flex flex-col items-center gap-2 text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <span>
-              <span className="font-semibold text-gray-700">Quiz Fisica</span>{" "}
+              <span className="font-semibold text-gray-700">Quiz Reti</span>{" "}
               &mdash; Made by{" "}
               <a
                 href="https://github.com/sekiganou"

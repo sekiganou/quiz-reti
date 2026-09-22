@@ -1,6 +1,4 @@
-import * as next from 'next';
-
-const nextConfig: next.NextConfig = {
+const nextConfig = {
   output: 'export',
   basePath: process.env.PAGES_BASE_PATH,
 };

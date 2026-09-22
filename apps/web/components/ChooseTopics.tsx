@@ -104,7 +104,7 @@ export const ChooseTopics = ({
                             onCheckedChange={handleSelectAll}
                             ref={(el) => {
                               if (el && "indeterminate" in el) {
-                                (el as HTMLInputElement).indeterminate =
+                                (el as unknown as HTMLInputElement).indeterminate =
                                   isIndeterminate;
                               }
                             }}
@@ -135,14 +135,14 @@ export const ChooseTopics = ({
                                       onCheckedChange={(checked: boolean) => {
                                         return checked
                                           ? field.onChange([
-                                              ...field.value,
-                                              stat.topic,
-                                            ])
+                                            ...field.value,
+                                            stat.topic,
+                                          ])
                                           : field.onChange(
-                                              field.value?.filter(
-                                                (value) => value !== stat.topic
-                                              )
-                                            );
+                                            field.value?.filter(
+                                              (value) => value !== stat.topic
+                                            )
+                                          );
                                       }}
                                     />
                                   </FormControl>
@@ -162,7 +162,7 @@ export const ChooseTopics = ({
                                     <span className="w-4 flex justify-center text-gray-500">
                                       {stat.totalAnswers > 0
                                         ? stat.totalAnswers -
-                                          stat.totalCorrectAnswers
+                                        stat.totalCorrectAnswers
                                         : "-"}
                                     </span>
                                   </FormLabel>

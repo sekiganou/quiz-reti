@@ -13,7 +13,7 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-const title = "Quiz Fisica";
+const title = "Quiz Reti";
 
 export default function RootLayout({
   children,
