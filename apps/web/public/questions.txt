@@ -36,7 +36,7 @@ T: Il pacchetto CTS è inviato in broadcast
 T: Il pacchetto RTS è inviato in broadcast
 
 Q: Rispetto ai protocolli a divisione del canale (es. TDM), quali sono i vantaggi di un protocollo ad accesso casuale (es. Ethernet)? Scegli una o più alternative:
-N: Generic
+N: Link Layer
 M: true
 T: Maggiori prestazioni a basso carico
 F: Maggiore semplicità
@@ -67,3 +67,112 @@ F: FTP
 F: AJAX
 T: HTTP
 F: HTML
+
+Q: Quali delle seguenti affermazioni sono vere riguardo allo streaming di Netflix o ai servizi di streaming video in generale. Scegli una o più alternative:
+N: Application Layer
+M: true
+F: Una volta che un video inizia lo streaming da un server di Netflix, la qualità del video rimane costante per tutta la riproduzione del video.
+T: In Netflix, il client richiede chunk di video, e ciascun chunk può avere una diversa velocità di codifica (qualità del video) e può essere recuperato da un diverso server.
+F: Una volta che un video inizia lo streaming da un determinato server di Netflix, quel server sarà l’unico server assegnato a trasmettere quel video a quel client per l’intera sessione di visualizzazione di questo video.
+
+Q: Quali delle seguenti sono differenze tra HTTP 1.1 e HTTP/2? Scegli una o più alternative:
+N: Application Layer
+M: true
+F: HTTP/2 fornisce una maggiore sicurezza utilizzando TLS.
+T: HTTP/2 consente a un grande oggetto di essere suddiviso in pezzi più piccoli e la trasmissione di questi pezzi di essere intercalata con la trasmissione di altri oggetti più piccoli, evitando così il “HOL (head-of-line) blocking”.
+F: HTTP/2 ha nuovi metodi HTTP e codici di stato.
+T: HTTP/2 consente agli oggetti in una connessione persistente di essere inviati in un ordine di priorità specificato dal client.
+
+Q: Quali d queste affermazioni che riguardano switch e router sono vere? Scegli una o più alternative:
+M: true
+N: Link Layer
+F: Entrambi sono in grado di autoconfigurarsi in modalità ”plug-and-play”
+T: Realizzano entrambi la funzione di inoltro (forwarding) dei pacchetti
+F: Gli switch hanno indirizzi di livello 2 ma non hanno indirizzi di livello 3
+F: I router hanno indirizzi di livello 3 ma non hanno indirizzi di livello 2
+T: Gli switch commutano pacchetti più velocemente dei router
+T: I router isolano i domini di broadcast a livello 2, gli switch no
+T: Gli switch possono realizzare solo topologie ad albero
+F: Eseguono entrambi protocolli di instradamento (routing) dei pacchetti
+
+Q: Supponiamo ci siano due ISP che forniscono accesso WiFi in un determinato bar, con ciascun ISP che opera il proprio AP e che ha il proprio blocco di indirizzi IP. Supponiamo inoltre che ciascun ISP abbia configurato il proprio AP per operare sul canale 11. Quali delle seguenti affermazioni sono vere? Scegli una o più alternative:
+N: Wireless Networks
+M: true
+F: Due dispositivi che trasmettono contemporaneamente interferiranno l’uno con l’altro, solo se sono associati alla stessa rete.
+F: Un dispositivo che esegue il sensing del canale rileverà solo le trasmissioni che avvengono verso/da l’AP a cui è associato.
+F: Nessun AP sarà in grado di operare correttamente, perché non saprà quali frame trasmessi da un dispositivo sono destinati a quale AP.
+T: Due dispositivi che trasmettono contemporaneamente interferiranno l’uno con l’altro, indipendentemente dalla rete a cui sono associati.
+T: I dispositivi saranno ancora in grado di associarsi con una rete o con l’altra.
+
+Q: Perché il server DNS locale usa una cache? Qual è il valore della memorizzazione nella cache nel server DNS locale? Selezionare tutto ciò che si applica.
+N: Application Layer
+M: true
+F: La memorizzazione nella cache del DNS fornisce la capacità di fungere da server autoritativo per diverse organizzazioni.
+T: La memorizzazione nella cache del DNS comporta un carico inferiore altrove nel DNS, quando la risposta a una query è presente nella cache locale.
+F: La memorizzazione nella cache del DNS fornisce accesso prioritario ai server radice, poiché la richiesta DNS proviene da una cache DNS locale.
+T: La memorizzazione nella cache del DNS consente risposte più veloci, se la risposta alla query è presente nella cache.
+
+Q: Confronto tra HTTP e SMTP. Quali delle seguenti caratteristiche si applicano solo a HTTP (e non si applicano a SMTP)? Nota: selezionare una o più delle caratteristiche di seguito.
+N: Application Layer
+M: true
+T: Opera principalmente come un protocollo di pull del client.
+T: Utilizza la porta del server 80.
+F: Utilizza CRLF.CRLF per indicare la fine del messaggio.
+T: Utilizza una riga vuota (CRLF) per indicare la fine dell’intestazione della richiesta.
+F: Ha interazione in formato ASCII, con codici di stato.
+F: È in grado di utilizzare una connessione TCP persistente per trasferire più oggetti.
+F: Opera principalmente come un protocollo di push del client.
+F: Utilizza la porta del server 25.
+
+Q: Quanti socket? Supponi che un server Web abbia cinque connessioni in corso che utilizzano la porta di ricezione TCP 80 e supponi che non ci siano altre connessioni TCP (aperte o in fase di apertura o chiusura) in quel server. Quanti socket TCP sono in uso in questo server?
+N: Application Layer
+F: 1
+T: 6
+F: 5
+F: 4
+
+Q: Quali delle seguenti affermazioni sono vere riguardo a uno "self-learning switch"
+M: true
+N: Link Layer
+T: Uno switch cancellerà (dimenticherà) un'associazione autoappresa tra un indirizzo MAC X e la porta dello switch Y se non riceve un frame con l'indirizzo MAC X in arrivo sulla porta dello switch Y dopo un certo periodo di tempo.
+T: Uno switch associa l'indirizzo MAC di origine in un frame in ingresso con la porta attraverso la quale è arrivato, e memorizza questa corrispondenza in una tabella.
+T: Uno switch libera un responsabile di rete da almeno un compito di configurazione che potrebbe essere associato alla gestione di uno switch.
+F: Uno switch non dimentica mai un'associazione tra un indirizzo MAC X e la porta dello switch Y.
+
+Q: Quale dei seguenti è un protollo Internet a livello applicativo?
+N: Application Layer
+F: Ethernet.
+T: DHCP.
+F: UDP.
+F: TCP.
+
+Q: Che vantaggi hanno i protocolli ad accesso multiplo a rotazione (e.g., Token ring), rispetto ai protocolli ad accesso casuale (CSMA)?
+N: Link Layer
+M: true
+T: Non generano collisioni
+F: Ottengono la latenza minima possibile
+F: Sono completamente distribuiti
+
+Q: Cookie HTTP. A cosa serve un cookie HTTP?
+N: Application Layer
+F: Un cookie è un codice utilizzato da un server, trasportato su una richiesta HTTP del client, per accedere alle informazioni che il server aveva precedentemente memorizzato su un’interazione precedente con questa persona. Nota: Pensare alla distinzione tra un browser e una persona.
+F: Un cookie è utilizzato per falsificare l’identità del client verso un server HTTP.
+T: Un cookie è un codice utilizzato da un server, trasportato su una richiesta HTTP del client, per accedere alle informazioni che il server aveva precedentemente memorizzato su un’interazione precedente con questo browser Web. Nota: Pensare alla distinzione tra un browser e una persona.
+F: I cookie vengono utilizzati alla fine di una transazione, per indicare la fine della transazione.
+F: Un cookie è un codice utilizzato da un client per autenticare l’identità di una persona verso un server HTTP.
+
+Q: Cosa contiene il record di tipo A del DNS? Quali informazioni contiene il record di tipo A nel database DNS? Selezionare tutto ciò che si applica.
+M: true
+N: Application Layer
+F: Un nome di alias e un vero nome per un server.
+T: Un nome host e un indirizzo IP.
+F: Un nome di dominio e il nome del server autoritativo per quel dominio.
+F: Un nome e il nome del server SMTP associato a quel nome.
+
+Q: Cosa è DASH? In DASH (Dynamic, Adaptive Streaming over HTTP), un server suddivide un file video in chunk che... (scegli il miglior completamento tra le seguenti opzioni)
+N: Application Layer
+F: ...vengono scaricati poco prima del loro tempo di riproduzione. La suddivisione è utilizzata principalmente perché uno spettatore potrebbe saltare avanti/indietro in un video.
+F: ...permettono agli utenti premium di evitare di guardare chunk che contengono pubblicità.
+F: ...sono scaricati a partire dal chunk più piccolo per massimizzare il numero di chunk ricevuti.
+F: ...sono memorizzati, ognuno codificato a diverse velocità (qualità del video). Il client riceve più chunk video (codificati a diverse velocità) e riproduce i chunk che si adattano meglio alle dimensioni dello schermo.
+T: ...sono memorizzati, ognuno codificato a diverse velocità (qualità del video). Il client riproduce il video chunk per chunk, con ciascun chunk richiesto alla velocità di codifica che si adatta alla banda disponibile al momento.
