@@ -176,3 +176,79 @@ F: ...permettono agli utenti premium di evitare di guardare chunk che contengono
 F: ...sono scaricati a partire dal chunk più piccolo per massimizzare il numero di chunk ricevuti.
 F: ...sono memorizzati, ognuno codificato a diverse velocità (qualità del video). Il client riceve più chunk video (codificati a diverse velocità) e riproduce i chunk che si adattano meglio alle dimensioni dello schermo.
 T: ...sono memorizzati, ognuno codificato a diverse velocità (qualità del video). Il client riproduce il video chunk per chunk, con ciascun chunk richiesto alla velocità di codifica che si adatta alla banda disponibile al momento.
+
+Q: Quali di queste affermazioni sono vere quando si parla di Collision Avoidance e Collision Detection?
+N: Link Layer
+M: true
+T: Entrambe fanno uso del rilevamento della portante (carrier sensing)
+F: Sul canale wireless non si può fare collision Detection
+F: Nello standard WiFi, così come in Ethernet, si chiede conferma dei frame ricevuti.
+F: La Collision Avoidance evita che avvengano collisioni sul canale
+
+Q: Quali di queste associazioni tra generazioni di reti cellulari con gli acronimi sono corrette:
+N: Wireless Networks
+M: true
+T: 4G - LTE
+F: 4G - EDGE
+F: 4G - GSM
+F: 4G - UMTS
+F: 2G - LTE
+F: 2G - EDGE
+T: 2G - GSM
+F: 2G - UMTS
+F: 2.5G - LTE
+T: 2.5G - EDGE
+F: 2.5G - GSM
+F: 2.5G - UMTS
+F: 3G - LTE
+F: 3G - EDGE
+F: 3G - GSM
+T: 3G - UMTS
+
+Q: Quali di questi abbinamenti tra la funzione di un server a un tipo di server DNS nell’organizzazione gerarchica dei server DNS sono corretti:
+N: Application Layer
+M: true
+F: Responsabile di un dominio (ad esempio, *.com, *.edu); sa come contattare i server DNS autoritativi: Root Server
+T: Responsabile di un dominio (ad esempio, *.com, *.edu); sa come contattare i server DNS autoritativi: TLD Server
+T: Livello più alto dell’organizzazione DNS, sa come raggiungere i server responsabili di un determinato dominio (ad esempio, *.com, *.edu): Root Server
+F: Livello più alto dell’organizzazione DNS, sa come raggiungere i server responsabili di un determinato dominio (ad esempio, *.com, *.edu): TLD Server
+F: Livello più alto dell’organizzazione DNS, sa come raggiungere i server responsabili di un determinato dominio (ad esempio, *.com, *.edu): Server DNS Autoritativo
+T: Fornisce mappature autoritative dei nomi di host in indirizzi IP per gli host dell’organizzazione: Server DNS Autoritativo
+F: Fornisce mappature autoritative dei nomi di host in indirizzi IP per gli host dell’organizzazione: Root Server
+F: Fornisce mappature autoritative dei nomi di host in indirizzi IP per gli host dell’organizzazione: TLD Server
+T: Risponde alle query DNS dell’host locale, contattando altri server DNS per rispondere alla query: DNS Locale
+F: Risponde alle query DNS dell’host locale, contattando altri server DNS per rispondere alla query: Root Server
+
+Q: Si consideri la seguente risposta HTTP fornita da un server: Il server è riuscito a individuare il documento richiesto?
+I: http_response_1.png
+N: Application Layer
+T: Si
+F: No
+F: Forse
+U: Quali sono i primi 5 caratteri del documento richiesto:
+T: <!doc
+F: <titl
+F: <cr><
+U: Il server ha accettato una connessione persistente?
+T: Si
+F: No
+F: Forse
+U: Quando è stato modificato il documento richiesto?
+T: 10 Dec 2005, 18:27:46
+F: 07 Mar 2008, 12:39:45
+F: Spring 2005
+U: A che ora è stata inviata la risposta?
+F: 18:27:46
+T: 12:39:45
+U: Da quanti byte è costituita la risposta?
+T: 3874
+F: 20
+F: 8859
+U: Da quanti byte è costituita la risposta?
+T: 3874
+F: 20
+F: 8859
+U: Quale tipo di documento ha ritornato il server?
+T: text/html
+F: html
+F: text
